@@ -1,9 +1,14 @@
-const chalk = require('chalk')
-const yargs = require('yargs')
-const notes = require('./notes.js')
+// Import the chalk module for styling console output
+const chalk = require('chalk');
+
+// Import the yargs module for command-line arguments parsing
+const yargs = require('yargs');
+
+// Import the notes module
+const notes = require('./notes.js');
 
 // Customize yargs version
-yargs.version('1.1.0')
+yargs.version('1.1.0');
 
 // Create add command
 yargs.command({
@@ -12,8 +17,8 @@ yargs.command({
     builder: {
         title: {
             describe: 'Note title',
-            demandOption: true,
-            type: 'string'
+            demandOption: true, // The option is required
+            type: 'string' // The option expects a string value
         },
         body: {
             describe: 'Note body',
@@ -22,9 +27,10 @@ yargs.command({
         }
     },
     handler(argv) {
-        notes.addNote(argv.title, argv.body)
+        // Call the addNote function from the notes module with title and body arguments
+        notes.addNote(argv.title, argv.body);
     }
-})
+});
 
 // Create remove command
 yargs.command({
@@ -38,18 +44,20 @@ yargs.command({
         }
     },
     handler(argv) {
-        notes.removeNote(argv.title)
+        // Call the removeNote function from the notes module with title argument
+        notes.removeNote(argv.title);
     }
-})
+});
 
 // Create list command
 yargs.command({
     command: 'list',
     describe: 'List your notes',
     handler() {
-        notes.listNotes()
+        // Call the listNotes function from the notes module
+        notes.listNotes();
     }
-})
+});
 
 // Create read command
 yargs.command({
@@ -63,8 +71,10 @@ yargs.command({
         }
     },
     handler(argv) {
-        notes.readNote(argv.title)
+        // Call the readNote function from the notes module with title argument
+        notes.readNote(argv.title);
     }
-})
+});
 
-yargs.parse()
+// Parse the command-line arguments
+yargs.parse();

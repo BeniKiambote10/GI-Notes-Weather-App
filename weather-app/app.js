@@ -1,30 +1,37 @@
+// Import the geocode and forecast modules from the utils directory
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
-const geocode = require('./utils/geocode')
-const forecast = require('./utils/forecast')
+// Retrieve the address from the command line arguments
+const address = process.argv[2];
 
-const address = process.argv[2]
- 
-if(!address) {
-    console.log('Please Provide An Address!')
+// Check if an address was provided
+if (!address) {
+    console.log('Please Provide An Address!');
 } else {
-    geocode(address, (error, {latitude, longitude, location} = {} ) => {
+    // Call the geocode function with the provided address
+    // The geocode function will get the latitude, longitude, and location
+    geocode(address, (error, { latitude, longitude, location } = {}) => {
         if (error) {
-             return console.log(error);
-        } 
+            // If there is an error in the geocode function, log the error
+            return console.log(error);
+        }
+        
+        // Call the forecast function with the latitude and longitude obtained from geocode
+        // The forecast function will get the weather forecast data
         forecast(latitude, longitude, (error, forecastData) => {
             if (error) {
+                // If there is an error in the forecast function, log the error
                 return console.log(error);
-            } 
-    
-    
-            console.log(location)
-            console.log(forecastData)
-        });
-    
-    })
-    
+            }
 
+            // Log the location and the forecast data
+            console.log(location);
+            console.log(forecastData);
+        });
+    });
 }
+
 
 
 
