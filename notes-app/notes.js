@@ -1,3 +1,7 @@
+const fs = require('fs');
+const chalk = require('chalk');
+
+
 // Function to add a new note
 const addNote = (title, body) => {
     // Load existing notes from the file
